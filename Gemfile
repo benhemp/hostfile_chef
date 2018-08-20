@@ -1,12 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'chef', '12.22.5'
+gem 'rake'
+gem 'berkshelf'
 
-group 'development' do
-  gem 'foodcritic'
-  gem 'rubocop'
+group :integration do
+  gem 'test-kitchen'
 end
 
-group :test do
-  gem 'chefspec'
+group :vagrant do
+  gem 'vagrant-wrapper'
+  gem 'kitchen-vagrant'
+end
+
+group :docker do
+  gem 'kitchen-docker'
 end

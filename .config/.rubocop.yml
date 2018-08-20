@@ -1,0 +1,26 @@
+AllCops:
+  RubyInterpreters:
+  - ruby
+  Exclude:
+  - '.circleci/**/*'
+  - '.config/**/*'
+  - '.git/**/*'
+  - '.idea/**/*'
+  - 'attributes/**/*'
+  - 'test/**/*'
+  - '*.gitignore'
+  - '*.md'
+  - '*.yml'
+  DefaultFormatter: progress
+  DisplayCopNames: true
+  StyleGuideBaseURL: https://github.com/rubocop-hq/ruby-style-guide
+  ExtraDetails: true
+  StyleGuideCopsOnly: false
+  EnabledByDefault: false
+  DisabledByDefault: false
+  UseCache: false
+  TargetRubyVersion: 2.5
+
+#################### Metrics ###############################
+Metrics/LineLength:
+  Enabled: false

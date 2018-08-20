@@ -1,0 +1,21 @@
+---
+driver:
+  name: docker
+  driver_config:
+    binary: docker.io
+    privileged: true
+    remove_images: true
+
+platforms:
+  - name: centos-6.10
+    driver_config:
+      image: centos:6.10
+      require_chef_omnibus: latest
+
+suites:
+  - name: default
+    run_list:
+      - recipe[hostfile::default]
+    attributes:
+      hostfile:
+        host_entry: ['host1 1.1.1.1', 'host2 2.2.2.2']

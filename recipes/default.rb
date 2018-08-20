@@ -7,10 +7,15 @@
 template '/etc/hosts' do
   source 'hosts.erb'
   path '/etc/hosts'
-  mode '211'
+  mode 211
   owner 'root'
   group 'root'
-  template_vars config['template_vars']
+  variables(
+      :entries => node['hostfile']['host_entry']
+  )
   action :create
 end
 
+service 'network' do
+  action :restart
+end

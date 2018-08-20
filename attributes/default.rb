@@ -1,0 +1,1 @@
+default['hostfile']['host_entry'] = []

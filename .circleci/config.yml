@@ -1,0 +1,17 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:latest
+    steps:
+      - check-out
+      - run:
+        name: Gem setup
+        command: |
+          gem install bundler
+          gem update --system
+          bundle install
+      - run:
+          name: Kitchen Test
+          command: KITCHEN_YAML=".kitchen.docker.yml" kitchen test
