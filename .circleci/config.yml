@@ -7,11 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Gem setup
-        command: |
-          gem install bundler
-          gem update --system
-          bundle install
+          name: Gem setup
+          command: |
+            gem install bundler
+            gem update --system
+            bundle install
       - run:
           name: Kitchen Test
           command: KITCHEN_YAML=".kitchen.docker.yml" kitchen test
