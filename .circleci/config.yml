@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.5.0
     steps:
-      - check-out
+      - checkout
       - run:
         name: Gem setup
         command: |
