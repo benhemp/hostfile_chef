@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:latest
+      - image: circleci/ruby:2.5.0
     steps:
       - check-out
       - run:
@@ -15,3 +15,8 @@ jobs:
       - run:
           name: Kitchen Test
           command: KITCHEN_YAML=".kitchen.docker.yml" kitchen test
+workflows:
+  version: 2
+  build:
+    jobs:
+    - build
