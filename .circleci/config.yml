@@ -1,5 +1,4 @@
 version: 2
-
 jobs:
   build:
     docker:
@@ -9,14 +8,27 @@ jobs:
       - run:
           name: Gem setup
           command: |
-            gem install bundler
             gem update --system
-            bundle install
+            gem install rubocop
       - run:
-          name: Kitchen Test
-          command: KITCHEN_YAML=".kitchen.docker.yml" kitchen test
+          name: Rubocop run
+          command: rubocop --config .config/.rubocop.yml
+    build:
+      machine:
+        services:
+          - docker
+          ruby:
+            version: 2.5.0
+      dependencies:
+        override:
+          - bundle check || bundle install --jobs=4 --retry=3:
+              timeout: 900
+      test:
+        override:
+          - KITCHEN_YAML=.kitchen.docker.yml bundle exec kitchen test
 workflows:
   version: 2
   build:
     jobs:
     - build
+    - test
