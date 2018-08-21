@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Cookbook:: hostfile_chef
 # Recipe:: default
@@ -10,9 +12,7 @@ template '/etc/hosts' do
   mode 211
   owner 'root'
   group 'root'
-  variables(
-      :entries => node['hostfile']['host_entry']
-  )
+  variables(entries: node['hostfile']['host_entry'])
   action :create
 end
 
