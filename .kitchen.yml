@@ -6,11 +6,16 @@ driver:
     privileged: true
     remove_images: true
 
+provisioner:
+  name: chef_zero
+  product_name: chef
+  product_version: latest
+  install_strategy: always
+
 platforms:
   - name: centos-6.10
     driver_config:
       image: centos:6.10
-      require_chef_omnibus: latest
 
 suites:
   - name: default

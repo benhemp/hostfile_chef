@@ -9,9 +9,8 @@
 template '/etc/hosts' do
   source 'hosts.erb'
   path '/etc/hosts'
-  mode 211
+  mode '0644'
   owner 'root'
-  group 'root'
   variables(entries: node['hostfile']['host_entry'])
   action :create
 end

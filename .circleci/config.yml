@@ -12,15 +12,19 @@ jobs:
             gem install rubocop
       - run:
           name: Rubocop run
-          command: rubocop --config .config/.rubocop.yml
+          command: rubocop -c .rubocop.yml
   test:
-    docker:
-      - image: centos:6.10
+    machine:
+      enabled: true
+      image: circleci/classic:latest
+      docker_layer_caching: true
     steps:
       - checkout
-      - run: |
-          yum -y update
-          curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
+      - run:
+          name: Gem setup
+          command: |
+            gem update --system
+
 workflows:
   version: 2
   build_and_test:

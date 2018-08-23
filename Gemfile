@@ -3,15 +3,20 @@
 source 'https://rubygems.org'
 
 gem 'berkshelf'
+gem 'chef'
+gem 'guard'
 gem 'rake'
 
-group :integration do
-  gem 'test-kitchen'
+group :development do
+  gem 'foodcritic'
+  gem 'guard-rubocop'
+  gem 'rubocop'
 end
 
-group :vagrant do
-  gem 'kitchen-vagrant'
-  gem 'vagrant-wrapper'
+group :integration do
+  gem 'busser-serverspec'
+  gem 'guard-kitchen'
+  gem 'test-kitchen'
 end
 
 group :docker do
