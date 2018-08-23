@@ -28,6 +28,7 @@ jobs:
             bundle install
       - run:
           name: Kitchen Test
+          command: kitchen test
 workflows:
   version: 2
   build_and_test:
