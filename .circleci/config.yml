@@ -25,6 +25,8 @@ jobs:
       - run:
           name: Gem Setup
           command: |
+            rvm install 2.5.0
+            rvm use 2.5.0
             gem install bundler
             gem update --system
             bundle install
