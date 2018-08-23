@@ -17,8 +17,6 @@ jobs:
     machine:
       enabled: true
       image: circleci/classic:latest
-      ruby:
-        version: 2.5.0
       docker_layer_caching: true
     steps:
       - checkout
