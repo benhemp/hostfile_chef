@@ -15,9 +15,10 @@ jobs:
           command: rubocop -c .rubocop.yml
   test:
     machine:
+      ruby:
+        version: 2.5.0
       enabled: true
       image: circleci/classic:latest
-      docker_layer_caching: true
     steps:
       - checkout
       - run:
