@@ -14,11 +14,8 @@ jobs:
           name: Rubocop Run
           command: rubocop -c .rubocop.yml
   test:
-    machine:
-      ruby:
-        version: 2.5.0
-      enabled: true
-      image: circleci/classic:latest
+    docker:
+      - image: circleci/ruby:2.5.0
     steps:
       - checkout
       - run:
