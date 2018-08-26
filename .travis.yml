@@ -1,3 +1,8 @@
+#safelist
+branches:
+  only:
+    - dev
+    - master
 
 # Needed for docker
 sudo: required
@@ -25,14 +30,12 @@ before_script:
 - docker info
 # Setup chefdk (Initialize your shell to use ChefDK as your primary ruby)
 - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-# Install test kitchen docker integration
-- /opt/chefdk/embedded/bin/chef gem install kitchen-docker
 
 script:
 # Run tests
 - /opt/chefdk/embedded/bin/chef --version
 - /opt/chefdk/embedded/bin/foodcritic . -f any
-- /opt/chefdk/embedded/bin/opt/chefdk/embedded/bin/chef gem install kitchen-docker/
+- /opt/chefdk/embedded/bin/rubocop -c .rubocop.yml
 # Run test kitchen using .kitchen.docker.yml instead of default .kitchen.yml
 - KITCHEN_YAML=.kitchen.yml kitchen verify ${INSTANCE}
 
