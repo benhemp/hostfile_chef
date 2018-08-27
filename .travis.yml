@@ -1,38 +1,31 @@
+---
 #safelist
 branches:
   only:
   - dev
   - master
 
-# Needed for docker
 sudo: required
 services:
   - docker
 
-# updating packages before start
 before_install:
   - sudo apt-get update -qq
   - rvm install 2.5.0
   - gem install bundler
   - gem update --system
 
-# build matrix
-install:
-  - bundle install
+install: bundle install
 
 before_script:
-  # Print out docker info
   - docker --version
   - docker info
   - rubocop -c .rubocop.yml
 
-script:
-  # Run tests
-  - kitchen test
+script: kitchen test
 
 
-  after_script:
-  # Print out debug information
+after_script:
   - docker images
   - docker ps -a
   - cat .kitchen/logs/*kitchen*.log
