@@ -1,46 +1,35 @@
-#safelist
+# safelist
 branches:
   only:
-    - dev
-    - master
+  - dev
+  - master
 
 # Needed for docker
 sudo: required
-
 services: docker
 
-# install the stable release of chefdk
-addons:
-  apt:
-    sources:
-    - chef-stable-precise
-    packages:
-    - chefdk
+# updating packages before start
+before_install:
+  - sudo apt-get update -qq
 
-# We don't need to install our gems as it comes from chefdk above
-install: ./install-dependencies.sh
-
-env:
-  matrix:
-  - INSTANCE=default-centos-6
+# build matrix
+matrix:
+  rvm: 2.5.0
+  gemfile: Gemfile
 
 before_script:
-# Print out docker info
-- docker --version
-- docker info
-# Setup chefdk (Initialize your shell to use ChefDK as your primary ruby)
-- eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  # Print out docker info
+  - docker --version
+  - docker info
+  - rubocop -c .rubocop.yml
 
 script:
-# Run tests
-- /opt/chefdk/embedded/bin/chef --version
-- /opt/chefdk/embedded/bin/foodcritic . -f any
-- /opt/chefdk/embedded/bin/rubocop -c .rubocop.yml
-# Run test kitchen using .kitchen.docker.yml instead of default .kitchen.yml
-- KITCHEN_YAML=.kitchen.yml kitchen verify ${INSTANCE}
+  # Run tests
+  - kitchen test
 
-after_script:
-# Print out debug information
-- docker images
-- docker ps -a
-- cat .kitchen/logs/*kitchen*.log
+
+  after_script:
+  # Print out debug information
+  - docker images
+  - docker ps -a
+  - cat .kitchen/logs/*kitchen*.log
