@@ -1,0 +1,31 @@
+---
+#safelist
+branches:
+  only:
+  - dev
+  - master
+
+sudo: required
+services:
+  - docker
+
+before_install:
+  - sudo apt-get update -qq
+  - rvm install 2.5.0
+  - gem install bundler
+  - gem update --system
+
+install: bundle install
+
+before_script:
+  - docker --version
+  - docker info
+  - rubocop -c .rubocop.yml
+
+script: kitchen test
+
+
+after_script:
+  - docker images
+  - docker ps -a
+  - cat .kitchen/logs/*kitchen*.log

@@ -1,12 +1,22 @@
 source 'https://rubygems.org'
 
-gem 'chef', '12.22.5'
+gem 'berkshelf'
+gem 'chef'
+gem 'guard'
+gem 'rake'
 
-group 'development' do
+group :development do
   gem 'foodcritic'
+  gem 'guard-rubocop'
   gem 'rubocop'
 end
 
-group :test do
-  gem 'chefspec'
+group :integration do
+  gem 'busser-serverspec'
+  gem 'guard-kitchen'
+  gem 'test-kitchen'
+end
+
+group :docker do
+  gem 'kitchen-docker'
 end
