@@ -1,12 +1,13 @@
-# safelist
+#safelist
 branches:
   only:
-    - dev
-    - master
+  - dev
+  - master
 
 # Needed for docker
 sudo: required
-services: docker
+services:
+  - docker
 
 # updating packages before start
 before_install:
